@@ -3,7 +3,7 @@
   "Type": "addon",
   "Org": "duccsoft",
   "Ident": "look_trigger",
-  "Tags": null,
+  "Tags": "map entity",
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
@@ -18,6 +18,9 @@
     "PhysicsMins": "-1,-1,-1",
     "PhysicsMaxs": "1,1,1",
     "RenderMins": "-1,-1,-1",
-    "RenderMaxs": "-1,-1,-1"
+    "RenderMaxs": "-1,-1,-1",
+    "Summary": "Provides trigger_look, which allows for events to be fired based on an entity\u0027s look direction.",
+    "Description": "",
+    "Public": true
   }
 }

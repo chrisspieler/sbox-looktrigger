@@ -22,7 +22,7 @@ public partial class TriggerLook : LookTrigger.BaseTrigger
     /// whenever a compatible entity is touching this trigger.
     /// </summary>
     [ConVar.Server("looktrigger_debug")]
-    public static bool DebugInfo { get; set; } = true;
+    public static bool DebugInfo { get; set; } = false;
 
     /// <summary>
     /// The amount of time that has elapsed since a compatible entity has touched this trigger.
