@@ -279,4 +279,40 @@ public partial class TriggerLook : LookTrigger.BaseTrigger
         WasLooking = false;
         TimedOut = false;
     }
+
+    public static void DrawGizmos(EditorContext context)
+    {
+        if (!context.IsSelected)
+        {
+            return;
+        }
+        var lookTargetProp = context.Target.GetProperty("LookTarget");
+        var lookTargetName = lookTargetProp.As.String;
+        var lookTarget = context.FindTarget(lookTargetName);
+        if (lookTarget == null)
+        {
+            return;
+        }
+
+        var fovProp = context.Target.GetProperty("FieldOfView");
+        var fov = fovProp.As.Float;
+
+        if (MathF.Abs(fov) >= 1f)
+        {
+            // Don't render an infinitely large field of view.
+            return;
+        }
+
+        var basePos = context.Target.Position;
+        var direction = (lookTarget.Position - basePos).Normal;
+        var coneLength = basePos.Distance(lookTarget.Position);
+        var extent = direction * coneLength;
+
+        // Figure out the radius of the circle at the base of the cone.
+        var halfAngle = MathF.Acos(fov) / 2;
+        var radius = coneLength * MathF.Tan(halfAngle);
+
+        Gizmo.Draw.Color = new Color(0f, 1f, 1f, 0.5f);
+        Gizmo.Draw.SolidCone(extent, direction * -coneLength, radius, 16);
+    }
 }
